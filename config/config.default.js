@@ -18,6 +18,18 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.security = {
+    csrf: {
+      // 关闭csrf 验证机制
+      enable: false,
+    },
+    // eslint-disable-next-line comma-dangle
+    domainWhiteList: [ '*' ]
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

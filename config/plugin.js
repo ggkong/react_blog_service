@@ -7,3 +7,11 @@ exports.mysql = {
   package: 'egg-mysql'
 // eslint-disable-next-line semi
 }
+
+// 添加配件 进行跨域
+exports.cors = {
+  enable: true,
+  // eslint-disable-next-line comma-dangle
+  package: 'egg-cors'
+// eslint-disable-next-line semi
+}

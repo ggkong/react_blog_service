@@ -9,14 +9,16 @@ class HomeController extends Controller {
     // eslint-disable-next-line indent
   }
   async getArticleList() {
-    const sql = 'SELECT * FROM article';
-    // const sql = 'SELECT article.id as id,' +
-    // 'article.title as title,' +
-    // 'article.introduce as introduce,' +
-    // 'article.addTime as addTime,' +
-    // 'article.view_count as view_count ,' +
-    // '.type.typeName as typeName ' +
-    // 'FROM article LEFT JOIN type ON article.type_id = type.Id';
+    const sql = 'select article.id,typeName,title,article_content,introduce,addTime,view_count from article, type where article.id=type.id';
+    const result = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: result,
+    };
+  }
+  // eslint-disable-next-line no-empty-function
+  async getArticleById() {
+    const id = this.ctx.params.id;
+    const sql = 'select article.id,typeName,title,article_content,introduce,addTime,view_count from article, type where article.id=type.id and article.id = ' + id;
     const result = await this.app.mysql.query(sql);
     this.ctx.body = {
       data: result,
