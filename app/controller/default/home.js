@@ -28,6 +28,7 @@ class HomeController extends Controller {
   // 获取type 列表 名称和 编号
   async getTypeInfo() {
     const result = await this.app.mysql.select('type');
+    console.log(result);
     this.ctx.body = { data: result };
   }
 
