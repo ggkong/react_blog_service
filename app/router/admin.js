@@ -7,5 +7,6 @@ module.exports = app => {
   router.get('/admin/getTypeInfo', adminauth, controller.admin.home.getTypeInfo);
   router.get('/admin/outLogin', adminauth, controller.admin.home.outLogin);
   router.post('/admin/addArticle', adminauth, controller.admin.home.addArticle); // 增加文章
+  router.post('/admin/upDateArticle', adminauth, controller.admin.home.upDateArticle); // 更新文章
   // eslint-disable-next-line eol-last
 };
