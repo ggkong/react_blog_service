@@ -12,6 +12,7 @@ module.exports = app => {
     addTime: { type: String },
     view_count: { type: Number },
     typeName: { type: String },
+    Id: { type: String }
   });
   return mongoose.model('article', ArticleSchema);
 };
