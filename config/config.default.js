@@ -54,6 +54,16 @@ module.exports = appInfo => {
     // load into agent, default is close
     agent: false,
   };
+  
+  // 配置 使用 mongoDB
+  exports.mongoose = {
+    client: {
+        url: 'mongodb://39.101.162.208/test',
+        options: {
+            useNewUrlParser: true,
+        },
+    }
+};
 
   return {
     ...config,

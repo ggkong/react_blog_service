@@ -81,6 +81,16 @@ class adminController extends Controller {
       isScussess: updateSuccess,
     };
   }
+  
+  async addUserTest() {
+    console.log('aaa')
+    const Model = this.ctx.app.model;
+    Model.AdminUser.create({'Id':1,'userName':'kongge','password':'123456'});
+    Model.AdminUser.create({'Id':2,'userName':'admin','password':'123456'});
+    
+    // this.ctx.body = userModel
+  }
+  
 
 }
 

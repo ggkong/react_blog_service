@@ -9,4 +9,5 @@ module.exports = app => {
   router.post('/admin/addArticle', adminauth, controller.admin.home.addArticle); // 增加文章
   router.post('/admin/upDateArticle', adminauth, controller.admin.home.upDateArticle); // 更新文章
   // eslint-disable-next-line eol-last
+  router.get('/admin/addUserTest', controller.admin.home.addUserTest);
 };

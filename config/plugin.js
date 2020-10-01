@@ -15,3 +15,8 @@ exports.cors = {
   package: 'egg-cors'
 // eslint-disable-next-line semi
 }
+
+exports.mongoose = {
+  enable: true,
+  package: 'egg-mongoose',
+};
