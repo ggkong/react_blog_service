@@ -81,6 +81,11 @@ class adminController extends Controller {
       isScussess: updateSuccess,
     };
   }
+  async getArticleList() {
+    const sql = 'select article.id,typeName,title,article_content,introduce,addTime,view_count from article, type where article.type_id=type.id order by id';
+    const resultList = await this.app.mysql.query(sql);
+    this.ctx.body = { list :resultList };
+  }
 
 }
 
