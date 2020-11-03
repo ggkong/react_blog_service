@@ -86,6 +86,19 @@ class adminController extends Controller {
     const resultList = await this.app.mysql.query(sql);
     this.ctx.body = { list :resultList };
   }
+  async delArticle() {
+    const id = this.ctx.params.id;
+    const res = await this.app.mysql.delete('article', { id });
+    this.ctx.body = { data: res };
+  }
+  async getArticleById() {
+    const id = this.ctx.params.id;
+    console.log(id);
+    const sql = 'select article.id as id,article.type_id as type_id,typeName,title,article_content,introduce,addTime,view_count from article, type where article.type_id=type.id and article.id = ' + id;
+    const result = await this.app.mysql.query(sql);
+    // 随便写的修改
+    this.ctx.body = { data: result };
+  }
 
 }
 
