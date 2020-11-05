@@ -11,6 +11,11 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {};
+  // 配置搜索引擎
+  config.elasticsearch = {
+    host: 'localhost:9200',
+    apiVersion: '5.6',
+  };
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1598922523657_7280';

@@ -41,6 +41,42 @@ class HomeController extends Controller {
       data: result,
     };
   }
+  async search() {
+    const { searchValue } = await this.ctx.request.body;
+    console.log(`后台请求到的数据${searchValue}`);
+    const result = await this.app.elasticsearch.search({
+      index: 'article',
+      body: {
+        query: {
+          bool: {
+            should: [
+              { match: {
+                title: searchValue,
+              } },
+              { match: {
+                introduce: searchValue,
+              } },
+              { match: {
+                article_content: searchValue,
+              } },
+            ],
+          },
+        },
+        highlight: {
+          pre_tags: "<span style='color:red'>",
+          post_tags: '</span>',
+          fields: {
+            title: {},
+            introduce: {},
+            article_content: {},
+          },
+        },
+      },
+    });
+    // 返回的结果
+    console.log(result.hits.hits);
+    this.ctx.body = { data: result.hits.hits };
+  }
 }
 
 // eslint-disable-next-line eol-last

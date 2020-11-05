@@ -58,6 +58,20 @@ class adminController extends Controller {
     // 查询刚存进去的  id 并且返回 给 前端
     console.log(result.insertId);
     const articleId = result.insertId;
+    // 添加到 elasticSearch 的索引库中方便以后进行查找
+    // 获得数据
+    const { title, article_content, introduce } = this.ctx.request.body;
+    await this.app.elasticsearch.bulk({
+      body: [
+        { index: { _index: 'article', _type: 'article', _id: articleId } },
+        {
+          title,
+          article_content,
+          introduce,
+          article_id: articleId,
+        },
+      ],
+    });
     this.ctx.body = {
       isScussess: insertSuccess,
       // eslint-disable-next-line object-shorthand
@@ -76,6 +90,18 @@ class adminController extends Controller {
     console.log(sql);
     const result = await this.app.mysql.query(sql);
     const updateSuccess = result.affectedRows === 1;
+    const { title, article_content, introduce } = this.ctx.request.body;
+    await this.app.elasticsearch.bulk({
+      body: [
+        { index: { _index: 'article', _type: 'article', _id: Article.upDateId } },
+        {
+          title,
+          article_content,
+          introduce,
+          article_id: Article.upDateId,
+        },
+      ],
+    });
     // 返回给前段 已经被修改
     this.ctx.body = {
       isScussess: updateSuccess,
@@ -86,9 +112,15 @@ class adminController extends Controller {
     const resultList = await this.app.mysql.query(sql);
     this.ctx.body = { list :resultList };
   }
+  // 删除文章
   async delArticle() {
     const id = this.ctx.params.id;
     const res = await this.app.mysql.delete('article', { id });
+    await this.app.elasticsearch.bulk({
+      body: [
+        { delete: { _index: 'article', _type: 'article', _id: this.ctx.params.id } },
+      ],
+    });
     this.ctx.body = { data: res };
   }
   async getArticleById() {

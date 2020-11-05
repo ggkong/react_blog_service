@@ -15,3 +15,8 @@ exports.cors = {
   package: 'egg-cors'
 // eslint-disable-next-line semi
 }
+
+exports.elasticsearch = {
+  enable: true,
+  package: 'egg-es',
+};

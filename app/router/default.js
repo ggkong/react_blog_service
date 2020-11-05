@@ -6,5 +6,7 @@ module.exports = app => {
   router.get('/default/getArticleById/:id', controller.default.home.getArticleById);
   router.get('/default/getTypeInfo', controller.default.home.getTypeInfo);
   router.get('/default/getListByTypeId/:type_id', controller.default.home.getListByTypeId);
+  router.post('/default/search', controller.default.home.search);
   // eslint-disable-next-line eol-last
+
 };
